@@ -180,6 +180,9 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(message)s'
         },
+        'command': {
+            'format': '%(asctime)s %(message)s'
+        },
     },
     'handlers': {
         'file': {
@@ -187,6 +190,12 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': 'mysite.log',
             'formatter': 'verbose'
+        },
+        'command': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'logs/command.log',
+            'formatter': 'command'
         },
     },
     'loggers': {
@@ -197,6 +206,10 @@ LOGGING = {
         },
         'MYAPP': {
             'handlers': ['file'],
+            'level': 'DEBUG',
+        },
+        'send_volunteer_sms': {
+            'handlers': ['command'],
             'level': 'DEBUG',
         },
     }
