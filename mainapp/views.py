@@ -86,6 +86,45 @@ class RegisterVolunteer(CreateView):
     fields = ['name', 'district', 'phone', 'organisation', 'area', 'address']
     success_url = '/reg_success/'
 
+
+class RenewVolunteerForm(forms.ModelForm):
+
+
+    class Meta:
+       model = Volunteer
+       help_texts = {
+            'local_body': 'Indicate the local body name',
+            'date_time': 'Indicate the dates that you are available for volunteering',
+        }
+       fields = ['district', 'name', 'local_body', 'phone', 'email', 'date_time', 'has_consented']
+
+       read_only = ('phone',)
+       widgets = {
+           'name': forms.Textarea(attrs={'rows':1}),
+           'phone': forms.Textarea(attrs={'rows':3, 'readonly':True}),
+       }
+
+class RenewVolunteerPage(CreateView):
+    model = Volunteer
+    # form_class = RenewVolunteerForm
+    fields = ['district', 'name', 'local_body', 'phone', 'email', 'date_time', 'has_consented']
+    # read_only = ('phone',)
+    template_name = "mainapp/renew_volunteer.html"
+    success_url = '/reg_success/'
+    volunteer_ph = ""
+
+    def dispatch(self, request, *args, **kwargs):
+        self.volunteer_ph = kwargs['volunteer_ph']
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # data = get_object_or_404(self.model, pk=self.volunteer_ph)
+        context['current'] = get_object_or_404(self.model, pk=self.volunteer_ph)
+        return context
+
+
 def volunteerdata(request):
     filter = VolunteerFilter( request.GET, queryset=Volunteer.objects.all() )
     req_data = filter.qs.order_by('-id')

@@ -62,4 +62,5 @@ urlpatterns = [
     path('consent_success/', views.ConsentSuccess.as_view(), name='consent_success'),
     url(r'c/(?P<pk>\d+)/(?P<ts>\d+)/$', views.VolunteerConsent.as_view(), name='volunteer_consent'),
     url('missing_and_finding_persons/', views.ReportFindPerson.as_view(), name='report_find_person'),
+    url(r'renewvolunteer/(?P<volunteer_ph>\d+)/$', views.RenewVolunteerPage.as_view(), name='renewvolunteer'),
 ]

@@ -6,8 +6,8 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class="breadcrumb-item"><a href="../ngo-volunteer/">Register as a Volunteer or NGO</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Register as Volunteer</li>
+    <li class="breadcrumb-item"><a href="../ngo-volunteer/">Renew as a Volunteer or NGO</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Renew as Volunteer</li>
   </ol>
 </nav>
 
@@ -15,7 +15,7 @@
 <h2 class="text-center">വൊളന്‍റീയര്‍ പുതുക്കാൻ</h2>
   <form method="post" id="volunteer_consent_form">
   {% csrf_token %}
-  {% if form.instance.pk %}
+  {% if current.phone %}
   
 	 <div class="table-responsive">
 	  <table class="table">
@@ -27,16 +27,16 @@
 
 	    <tbody>
 	      <tr>
-	        <td><b> District : </b></td><td>{{ form.instance.district }}</td>
+	        <td><b> District : </b></td><td>{{ current.district_name }}</td>
 	      </tr>
 	      <tr>
-	        <td><b> Name : </b></td><td>{{ form.instance.name }}</td>
+	        <td><b> Name : </b></td><td>{{ current.name }}</td>
 	      </tr>
 	      <tr>
 	        <td><b> Local Body Name : </b></td><td>{{ form.instance.local_body }}</td>
 	      </tr>
         <tr>
-	        <td><b> phone : </b></td><td>{{ form.instance.phone }}</td>
+	        <td><b> phone : </b></td><td>{{ current.phone }}</td>
 	      </tr>
         <tr>
 	        <td><b> email : </b></td><td>{{ form.instance.email }}</td>
@@ -44,11 +44,11 @@
         <tr>
 	        <td><b> Available Date And Time : </b></td><td>{{ form.instance.date_time }}</td>
 	      </tr>
-        
+
         <!-- consent is not must beacuse we can select the records with date_time id notNull -->
-        
+
 	      <tr>
-	        <td><b> Consent : </b></td><td>{% if form.instance.has_consented %} yes {% else %} no {% endif %}</td>
+	        <td><b> Consent : </b></td><td>{% if current.has_consented %} yes {% else %} no {% endif %}</td>
 	      </tr>
 		  <tr>
 			  <td colspan="2" style="text-align:center;">	
