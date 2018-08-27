@@ -191,10 +191,10 @@ LOGGING = {
             'filename': 'mysite.log',
             'formatter': 'verbose'
         },
-        'command': {
+        'send_volunteer_sms': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'logs/command.log',
+            'filename': 'logs/send_volunteer_sms.log',
             'formatter': 'command'
         },
     },
@@ -209,7 +209,7 @@ LOGGING = {
             'level': 'DEBUG',
         },
         'send_volunteer_sms': {
-            'handlers': ['command'],
+            'handlers': ['send_volunteer_sms'],
             'level': 'DEBUG',
         },
     }
