@@ -13,138 +13,138 @@
 
 <h1 class="text-center">Renew as Volunteer</h1>
 <h2 class="text-center">വൊളന്‍റീയര്‍ പുതുക്കാൻ</h2>
-<form method="post" id="volunteer_consent_form">
-		<fieldset>
-			<legend>Personal Details | വ്യക്തിഗത വിശദാംശങ്ങൾ</legend>
-			<div class="form-group">
-				<label class="control-label" for="id_name">Name - പേര്</label>
-				<input type="text" name="name" maxlength="100" class="form-control" placeholder="Name - പേര്" title="" required id="id_name"
-				 value="{{ current.name }}">
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="id_phone">Phone - ഫോണ്‍ നമ്പര്‍</label>
-				<input type="text" name="phone" maxlength="14" class="form-control" placeholder="Phone - ഫോണ്‍ നമ്പര്‍" value="{{ current.phone }}"
-				 title="Not Editable" disabled id="id_phone">
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="id_phone">email - ഇമെയിൽ</label>
-				<input type="text" name="email" maxlength="150" class="form-control" placeholder="email - ഇമെയിൽ" title=" " value="{{ current.email }}"
-				 required id="id_email ">
-			</div>
-			<div class="form-group ">
-				<label class="control-label " for="id_address ">Address - വിലാസം</label>
-				<textarea name="address " cols="40 " rows="10 " class="form-control " placeholder="Address - വിലാസം " title="" required id="id_address ">{{ current.address }}</textarea>
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="id_area">District - ജില്ല</label>
-				<select name="area" class="form-control" title="" required id="id_area">
-					<!-- want to change the value attribute of option-->
-					<option value="" selected>---------</option>
-					<option value="mlp">Malappuram</option>
-					<option value="tvr">Thiruvananthapuram</option>
-					<option value="elw">Ernakulam</option>
-					<option value="mew">Thrissur</option>
-					<option value="cvw">Kozhikode</option>
-					<option value="plw">Palakkad</option>
-					<option value="vls">Kollam</option>
-					<option value="ckg">Kannur</option>
-					<option value="rlo">Alappuzha</option>
-					<option value="cln">Kottayam</option>
-					<option value="bot">Kasaragod</option>
-					<option value="rck">Pathanamthitta</option>
-					<option value="oth">Idukki</option>
-					<option value="oth">Wayanad</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="id_local_body">Local Body Name - പ്രാദേശിക ബോഡി നാമം</label>
-				<select name="local_body" class="form-control" title="" required id="id_local_body">
-					<option value="" selected>---------</option>
-					<!-- The Value Attribute Need To Removed.Name will be value -->
-					<option value="dcr">something</option>
-					<option value="dcr">something</option>
-				</select>
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend>Organisation/Institution Details (optional) | ഓർഗനൈസേഷൻ / സ്ഥാപനം വിശദാംശങ്ങൾ</legend>
-			<div class="form-group ">
-				<label class="control-label " for="id_organisation ">Organization (സംഘടന) / Institution </label>
-				<input type="text " name="organisation " maxlength="250 " class="form-control " placeholder="Organization (സംഘടന) /
-						 Institution " title=" " id="id_organisation " value="{{ current.organisation }}">
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend>Available Date & Time To Work | ലഭ്യമായ തിയ്യതിയും ജോലി ചെയ്യാനുള്ള സമയവും</legend>
-			<div class="form-group">
-				<label class="control-label" for="id_available_date">Available Date - ലഭ്യമായ തിയ്യതി</label>
-				<input type="text" name="date" maxlength="150" class="form-control" placeholder="Available Date - ലഭ്യമായ തിയ്യതി" title="" required id="id_date">
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="id_time">Available Time - ലഭ്യമായ സമയം</label>
-				<input type="text" name="time" maxlength="150" class="form-control" placeholder="Available Time - ലഭ്യമായ സമയം" title="" required id="id_time">
-			</div>
-		</fieldset>
-		<fieldset>
-			<legend>Account Creation | അക്കൗണ്ട് സൃഷ്ടിക്കൽ</legend>
-			<div class="form-group">
-				<label class="control-label" for="id_pass">Password - പാസ്വേഡ്</label>
-				<input type="password" name="password" maxlength="150" class="form-control" placeholder="Password - പാസ്വേഡ്" title="" required
-				 id="id_password">
-			</div>
-			<div class="form-group">
-				<label class="control-label" for="id_re_pass">Retype Password - പാസ്വേഡ് വീണ്ടും ടൈപ്പുചെയ്യുക </label>
-				<input type="password" name="re_password" maxlength="150" class="form-control" placeholder="Retype Password - പാസ്വേഡ് വീണ്ടും ടൈപ്പുചെയ്യുക"
-				 title="" required id="id_re_password">
-			</div>
-		</fieldset>
+<form method="post" id="volunteer_consent_form">{% csrf_token %}
+	<fieldset>
+		<legend>Personal Details | വ്യക്തിഗത വിശദാംശങ്ങൾ</legend>
 		<div class="form-group">
-			<label>
-				<input id="consent" type="radio" checked class="big-input" /> Like to Continue As A Volunteer <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				ഒരു വോളന്റിയായി തുടരാൻ ആഗ്രഹിക്കുന്നു
-			</label>
-			<label>
-				<input id="not_consent" type="radio" class="big-input" /> Don't like to Continue As A Volunteer<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ഒരു വോളന്റിയായി
-				തുടരാൻ ഇഷ്ടപ്പെടുന്നില്ല
-			</label>
+			<label class="control-label" for="id_name">Name - പേര്</label>
+			<input type="text" name="name" maxlength="100" class="form-control" placeholder="Name - പേര്" title="" required id="id_name"
+			 value="{{ current.name }}">
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="id_phone">Phone - ഫോണ്‍ നമ്പര്‍</label>
+			<input type="text" name="phone" maxlength="14" class="form-control" placeholder="Phone - ഫോണ്‍ നമ്പര്‍" value="{{ current.phone }}"
+			 title="Not Editable" disabled id="id_phone">
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="id_phone">email - ഇമെയിൽ</label>
+			<input type="text" name="email" maxlength="150" class="form-control" placeholder="email - ഇമെയിൽ" title=" " value="{{ current.email }}"
+			 required id="id_email ">
 		</div>
 		<div class="form-group ">
-			<blockquote><small>
-					By providing your personal information, you consent to making such information accessible to persons who visit this website.
-					You further acknowledge and agree that in order to serve the specific purposes for which personal information is volunteered
-					by you, such information needs to be accessible to the public at large and therefore, by volunteering your information
-					on this website, you consent to making such information public. By providing your phone number and email address, you
-					further consent to being contacted by anyone who accesses such information through this website. The creators of this
-					website or the government of Kerala shall not be liable for any unauthorized use, misuse or sharing of such information.
-				</small></blockquote>
-			<div class="form-group">
-				<label><input id="register_consent" type="checkbox" value="" class="big-input"> I agree to the terms and conditions | നിയമങ്ങളും വ്യവസ്തകളും ഞാന് അംഗീകരിക്കുന്നു</label>
-			</div>
-			<div class="form-group">
-				<button type="submit " class="btn btn-primary " id="submit_btn "><span class="glyphicon glyphicon-star "></span> Submit</button>
-			</div>
+			<label class="control-label " for="id_address ">Address - വിലാസം</label>
+			<textarea name="address " cols="40 " rows="10 " class="form-control " placeholder="Address - വിലാസം " title="" required id="id_address ">{{ current.address }}</textarea>
 		</div>
-	</form>
+		<div class="form-group">
+			<label class="control-label" for="id_area">District - ജില്ല</label>
+			<select name="area" class="form-control" title="" required id="id_area">
+				<!-- want to change the value attribute of option-->
+				<option value="" selected>---------</option>
+				<option value="mlp">Malappuram</option>
+				<option value="tvr">Thiruvananthapuram</option>
+				<option value="elw">Ernakulam</option>
+				<option value="mew">Thrissur</option>
+				<option value="cvw">Kozhikode</option>
+				<option value="plw">Palakkad</option>
+				<option value="vls">Kollam</option>
+				<option value="ckg">Kannur</option>
+				<option value="rlo">Alappuzha</option>
+				<option value="cln">Kottayam</option>
+				<option value="bot">Kasaragod</option>
+				<option value="rck">Pathanamthitta</option>
+				<option value="oth">Idukki</option>
+				<option value="oth">Wayanad</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="id_local_body">Local Body Name - പ്രാദേശിക ബോഡി നാമം</label>
+			<select name="local_body" class="form-control" title="" required id="id_local_body">
+				<option value="" selected>---------</option>
+				<!-- The Value Attribute Need To Removed.Name will be value -->
+				<option value="dcr">something</option>
+				<option value="dcr">something</option>
+			</select>
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Organisation/Institution Details (optional) | ഓർഗനൈസേഷൻ / സ്ഥാപനം വിശദാംശങ്ങൾ</legend>
+		<div class="form-group ">
+			<label class="control-label " for="id_organisation ">Organization (സംഘടന) / Institution </label>
+			<input type="text " name="organisation " maxlength="250 " class="form-control " placeholder="Organization (സംഘടന) /
+					 Institution " title=" " id="id_organisation " value="{{ current.organisation }}">
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Available Date & Time To Work | ലഭ്യമായ തിയ്യതിയും ജോലി ചെയ്യാനുള്ള സമയവും</legend>
+		<div class="form-group">
+			<label class="control-label" for="id_available_date">Available Date - ലഭ്യമായ തിയ്യതി</label>
+			<input type="text" name="date" maxlength="150" class="form-control" placeholder="Available Date - ലഭ്യമായ തിയ്യതി" title="" required id="id_date">
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="id_time">Available Time - ലഭ്യമായ സമയം</label>
+			<input type="text" name="time" maxlength="150" class="form-control" placeholder="Available Time - ലഭ്യമായ സമയം" title="" required id="id_time">
+		</div>
+	</fieldset>
+	<fieldset>
+		<legend>Account Creation | അക്കൗണ്ട് സൃഷ്ടിക്കൽ</legend>
+		<div class="form-group">
+			<label class="control-label" for="id_pass">Password - പാസ്വേഡ്</label>
+			<input type="password" name="password" maxlength="150" class="form-control" placeholder="Password - പാസ്വേഡ്" title="" required
+			 id="id_password">
+		</div>
+		<div class="form-group">
+			<label class="control-label" for="id_re_pass">Retype Password - പാസ്വേഡ് വീണ്ടും ടൈപ്പുചെയ്യുക </label>
+			<input type="password" name="re_password" maxlength="150" class="form-control" placeholder="Retype Password - പാസ്വേഡ് വീണ്ടും ടൈപ്പുചെയ്യുക"
+			 title="" required id="id_re_password">
+		</div>
+	</fieldset>
+	<div class="form-group">
+		<label>
+			<input id="consent" type="radio" checked class="big-input" /> Like to Continue As A Volunteer <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			ഒരു വോളന്റിയായി തുടരാൻ ആഗ്രഹിക്കുന്നു
+		</label>
+		<label>
+			<input id="not_consent" type="radio" class="big-input" /> Don't like to Continue As A Volunteer<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ഒരു വോളന്റിയായി
+			തുടരാൻ ഇഷ്ടപ്പെടുന്നില്ല
+		</label>
+	</div>
+	<div class="form-group ">
+		<blockquote><small>
+				By providing your personal information, you consent to making such information accessible to persons who visit this website.
+				You further acknowledge and agree that in order to serve the specific purposes for which personal information is volunteered
+				by you, such information needs to be accessible to the public at large and therefore, by volunteering your information
+				on this website, you consent to making such information public. By providing your phone number and email address, you
+				further consent to being contacted by anyone who accesses such information through this website. The creators of this
+				website or the government of Kerala shall not be liable for any unauthorized use, misuse or sharing of such information.
+			</small></blockquote>
+		<div class="form-group">
+			<label><input id="register_consent" type="checkbox" value="" class="big-input"> I agree to the terms and conditions | നിയമങ്ങളും വ്യവസ്തകളും ഞാന് അംഗീകരിക്കുന്നു</label>
+		</div>
+		<div class="form-group">
+			<button type="submit " class="btn btn-primary " id="submit_btn "><span class="glyphicon glyphicon-star "></span> Submit</button>
+		</div>
+	</div>
+</form>
 
-	<script src="./Kerala Rescue_files/jquery.min.js "></script>
-	<script>
-		$(document).ready(function () {
-			$("[name=other_status] ").attr('type', 'hidden');
+<script src="./Kerala Rescue_files/jquery.min.js "></script>
+<script>
+	$(document).ready(function () {
+		$("[name=other_status] ").attr('type', 'hidden');
+		$("[name=other_status] ").attr('required', false)
+		$("[for=id_other_status] ").hide();
+
+	})
+	$("[name=status] ").change(function () {
+		var value = this.value;
+		if (value !== 'otr') {
+			$("[name=other_status] ").attr('type', 'hidden')
 			$("[name=other_status] ").attr('required', false)
-			$("[for=id_other_status] ").hide();
+			// $("[for=id_other_status] ").hide();
+		} else {
+			$("[name=other_status] ").attr('type', 'text')
+			// $("[for=id_other_status] ").show();
+		}
+	})
 
-		})
-		$("[name=status] ").change(function () {
-			var value = this.value;
-			if (value !== 'otr') {
-				$("[name=other_status] ").attr('type', 'hidden')
-				$("[name=other_status] ").attr('required', false)
-				// $("[for=id_other_status] ").hide();
-			} else {
-				$("[name=other_status] ").attr('type', 'text')
-				// $("[for=id_other_status] ").show();
-			}
-		})
-
-	</script>
+</script>
 {% endblock %}
