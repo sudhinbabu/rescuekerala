@@ -195,11 +195,11 @@ class Volunteer(models.Model):
         verbose_name="District - ജില്ല"
     )
     name = models.CharField(max_length=100, verbose_name="Name - പേര്")
+
     phone_number_regex = RegexValidator(regex='^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$', message='Please Enter 10 digit mobile number or landline as 0<std code><phone number>', code='invalid_mobile')
     phone = models.CharField(max_length=14, verbose_name="Phone - ഫോണ്‍ നമ്പര്‍", validators=[phone_number_regex])
-    email = models.EmailField(max_length=250, blank=True)
+
     organisation = models.CharField(max_length=250, verbose_name="Organization (സംഘടന) / Institution")
-    local_body = models.TextField(max_length=250, default= "")
     address = models.TextField(verbose_name="Address - വിലാസം")
     area = models.CharField(
         max_length = 15,
@@ -208,7 +208,6 @@ class Volunteer(models.Model):
     )
     is_spoc = models.BooleanField(default=False, verbose_name="Is point of contact")
     joined = models.DateTimeField(auto_now_add=True)
-    date_time = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     has_consented = models.BooleanField(default=False, verbose_name="Available")
 
@@ -218,25 +217,6 @@ class Volunteer(models.Model):
 
     def __str__(self):
         return self.name
-
-    @property
-    def district_name(self):
-        return {
-            'alp': 'Alappuzha - ആലപ്പുഴ',
-            'ekm': 'Ernakulam - എറണാകുളം',
-            'idk': 'Idukki - ഇടുക്കി',
-            'knr': 'Kannur - കണ്ണൂർ',
-            'ksr': 'Kasaragod - കാസർഗോഡ്',
-            'kol': 'Kollam - കൊല്ലം',
-            'ktm': 'Kottayam - കോട്ടയം',
-            'koz': 'Kozhikode - കോഴിക്കോട്',
-            'mpm': 'Malappuram - മലപ്പുറം',
-            'pkd': 'Palakkad - പാലക്കാട്',
-            'ptm': 'Pathanamthitta - പത്തനംതിട്ട',
-            'tvm': 'Thiruvananthapuram - തിരുവനന്തപുരം',
-            'tcr': 'Thrissur - തൃശ്ശൂർ',
-            'wnd': 'Wayanad - വയനാട്',
-        }.get(self.district, 'Unknown')
 
 
 class NGO(models.Model):

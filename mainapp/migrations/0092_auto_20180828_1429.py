@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
             name='LocalBody',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('body_type', models.CharField(choices=[('corporation', 'corporation'), ('municipality', 'municipality'), ('panchayat', 'panchayat')], max_length=20)),
+                ('body_type', models.CharField(choices=[('corporation', 'corporation'), ('muncipality', 'municipality'), ('panchayat', 'panchayat')], max_length=20)),
                 ('name', models.CharField(max_length=200)),
                 ('district', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainapp.District')),
             ],
