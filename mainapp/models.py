@@ -673,3 +673,28 @@ class CsvBulkUpload(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class District(models.Model):
+    name = models.CharField(max_length=150)
+    described_name = models.CharField(max_length=255)
+    code = models.CharField(max_length=3, unique=True)
+
+    def __repr__(self):
+        return "{} - {}".format(self.id, self.name)
+
+
+class LocalBody(models.Model):
+    local_body_types = (
+        ("corporation", "corporation"),
+        ("municipality", "municipality"),
+        ("panchayat", "panchayat"))
+    body_type = models.CharField(max_length=20, choices=local_body_types)
+    district = models.ForeignKey(District, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+
+    class Meta:
+        unique_together = ("name", "district")
+
+    def __repr__(self):
+        return "{} - {}".format(self.id, self.name)
