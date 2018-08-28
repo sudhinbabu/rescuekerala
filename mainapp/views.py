@@ -987,3 +987,12 @@ class CollectionCenterView(CreateView):
     model = CollectionCenter
     form_class = CollectionCenterForm
     success_url = '/collection_centers/'
+
+
+def test_send_sms(request):
+    print(request.GET)
+    import time
+    time.sleep(2)
+    return JsonResponse({
+        "success": True
+        }, safe=False)
