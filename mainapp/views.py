@@ -106,7 +106,7 @@ class RenewVolunteerForm(forms.ModelForm):
 
 class RenewVolunteerPage(CreateView):
     model = Volunteer
-    fields = ['district', 'organisation', 'name', 'local_body', 'phone', 'email', 'date_time', 'has_consented']
+    fields = ['district', 'organisation', 'is_active', 'name', 'local_body', 'phone', 'email', 'date_time', 'has_consented']
     template_name = "mainapp/renew_volunteer.html"
     success_url = '/reg_success/'
     volunteer_ph = ""
@@ -115,14 +115,12 @@ class RenewVolunteerPage(CreateView):
         self.volunteer_ph = kwargs['volunteer_ph']
         return super().dispatch(request, *args, **kwargs)
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
         try:
-            context['current'] = self.model.objects.all().filter(phone=self.volunteer_ph)[0]
+            current = self.model.objects.all().filter(phone=self.volunteer_ph)[0]
         except:
-            return HttpResponseRedirect("/reg_fail")
-        return context
+            return HttpResponseRedirect(reverse("reg_fail"))
+        return render(request, self.template_name, {"current": current})
 
 
 def volunteerdata(request):
