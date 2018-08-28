@@ -13,7 +13,7 @@
 
 <h1 class="text-center">Renew as Volunteer</h1>
 <h2 class="text-center">വൊളന്‍റീയര്‍ പുതുക്കാൻ</h2>
-<form method="post" id="volunteer_consent_form">{% csrf_token %}
+<form method="post" id="volunteer_consent_form" action="/renewvolunteer/{{ current.phone }}/">{% csrf_token %}
 	<fieldset>
 		<legend>Personal Details | വ്യക്തിഗത വിശദാംശങ്ങൾ</legend>
 		<div class="form-group">
@@ -37,6 +37,7 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label" for="id_area">District - ജില്ല</label>
+			<input type="hidden" id="district_val" value="{{ current.district }}">
 			<select name="area" class="form-control" title="" required id="id_area">
 				<!-- want to change the value attribute of option-->
 				<option value="" selected>---------</option>
@@ -132,9 +133,20 @@
 		$("[name=other_status] ").attr('type', 'hidden');
 		$("[name=other_status] ").attr('required', false)
 		$("[for=id_other_status] ").hide();
-
-	})
-	$("[name=status] ").change(function () {
+		var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+		function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+		$.ajaxSetup({
+		beforeSend: function(xhr, settings) {
+			if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+				var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+				xhr.setRequestHeader("X-CSRFToken", csrftoken);
+			}
+		}
+		});
+		$("[name=status] ").change(function () {
 		var value = this.value;
 		if (value !== 'otr') {
 			$("[name=other_status] ").attr('type', 'hidden')
@@ -144,19 +156,7 @@
 			$("[name=other_status] ").attr('type', 'text')
 			// $("[for=id_other_status] ").show();
 		}
+		})
 	})
-	var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-	function csrfSafeMethod(method) {
-		// these HTTP methods do not require CSRF protection
-		return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-	}
-	$.ajaxSetup({
-		beforeSend: function(xhr, settings) {
-			if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-				var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
-				xhr.setRequestHeader("X-CSRFToken", csrftoken);
-			}
-		}
-	});
 </script>
 {% endblock %}
