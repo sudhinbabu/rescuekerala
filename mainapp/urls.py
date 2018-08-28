@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'request_details/(?P<request_id>\d+)/$', views.request_details, name='requestdetailsview'),
     path('contactus/', views.districtmanager_list, name='contactus'),
     path('reg_success/', views.RegSuccess.as_view(), name='reg_successview'),
+    path('reg_fail/', views.RegFail.as_view(), name='reg_fail'),
     path('req_sucess/', views.ReqSuccess.as_view(), name='req_sucessview'),
     path('district_needs/', views.DistNeeds.as_view(), name='distneedsview'),
     path('collection_center/', views.CollectionCenterView.as_view(), name='collection_centers_view'),

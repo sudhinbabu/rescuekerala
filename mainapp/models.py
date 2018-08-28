@@ -2,7 +2,6 @@ import os
 import uuid
 from enum import Enum
 import csv
-from datetime import datetime
 import codecs
 
 from django.db import models
@@ -196,12 +195,11 @@ class Volunteer(models.Model):
         verbose_name="District - ജില്ല"
     )
     name = models.CharField(max_length=100, verbose_name="Name - പേര്")
-
     phone_number_regex = RegexValidator(regex='^((\+91|91|0)[\- ]{0,1})?[456789]\d{9}$', message='Please Enter 10 digit mobile number or landline as 0<std code><phone number>', code='invalid_mobile')
-    phone = models.CharField(max_length=14, verbose_name="Phone - ഫോണ്‍ നമ്പര്‍", validators=[phone_number_regex], primary_key=True)
+    phone = models.CharField(max_length=14, verbose_name="Phone - ഫോണ്‍ നമ്പര്‍", validators=[phone_number_regex])
     email = models.EmailField(max_length=250, blank=True)
     organisation = models.CharField(max_length=250, verbose_name="Organization (സംഘടന) / Institution")
-    local_body = models.CharField(max_length=250, default= "")
+    local_body = models.TextField(max_length=250, default= "")
     address = models.TextField(verbose_name="Address - വിലാസം")
     area = models.CharField(
         max_length = 15,
