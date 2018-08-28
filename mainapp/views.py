@@ -122,6 +122,12 @@ class RenewVolunteerPage(CreateView):
             return HttpResponseRedirect(reverse("reg_fail"))
         return render(request, self.template_name, {"current": current})
 
+    def form_invalid(self, form):
+        return HttpResponse(form.errors)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 def volunteerdata(request):
     filter = VolunteerFilter( request.GET, queryset=Volunteer.objects.all() )
