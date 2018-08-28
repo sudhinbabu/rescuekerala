@@ -1,0 +1,267 @@
+{% extends 'base.html' %} {% load bootstrap3 %} {% block content %}
+<!--Navigation Breadcrumbs-->
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="../ngo-volunteer/">Renew as a Volunteer or NGO</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Renew as Volunteer</li>
+    </ol>
+</nav>
+<h1 class="text-center">Renew as Volunteer</h1>
+<h2 class="text-center">വൊളന്‍റീയര്‍ പുതുക്കാൻ</h2>
+<form method="post" id="volunteer_consent_form" action="/renewvolunteer/{{ current.phone }}/">{% csrf_token %}
+    <fieldset>
+        <p id="head"></p>
+        <legend>Personal Details | വ്യക്തിഗത വിശദാംശങ്ങൾ</legend>
+        <div class="form-group">
+            <p id="p1"></p>
+            <label class="control-label" for="id_name">Name - പേര്</label>
+            <input type="text" name="name" maxlength="100" class="form-control" placeholder="Name - പേര്" title="" id="id_name" value="{{ current.name }}">
+        </div>
+        <div class="form-group">
+            <p id="p2"></p>
+            <label class="control-label" for="id_phone">Phone - ഫോണ്‍ നമ്പര്‍</label>
+            <input type="text" name="phone" maxlength="14" class="form-control" placeholder="Phone - ഫോണ്‍ നമ്പര്‍" value="{{ current.phone }}"
+                title="Not Editable" disabled id="id_phone">
+        </div>
+        <div class="form-group">
+            <p id="p3"></p>
+            <label class="control-label" for="id_phone">Email - ഇമെയിൽ</label>
+            <input type="text" name="email" maxlength="150" class="form-control" placeholder="Email - ഇമെയിൽ" title="" value="{{ current.email }}"
+                id="id_email" />
+        </div>
+        <div class="form-group ">
+            <p id="p4"></p>
+            <label class="control-label " for="id_address">Address - വിലാസം</label>
+            <textarea name="address" cols="40 " rows="10 " class="form-control " placeholder="Address - വിലാസം " title="" id="id_address">{{ current.address }}</textarea>
+        </div>
+        <div class="form-group">
+            <p id="p5"></p>
+            <label class="control-label" for="id_area">District - ജില്ല</label>
+            <select name="area" class="form-control" title="" id="id_area">
+                <!-- want to change the value attribute of option-->
+                <option value="" selected>---------</option>
+                <option value="mlp">Malappuram</option>
+                <option value="tvr">Thiruvananthapuram</option>
+                <option value="elw">Ernakulam</option>
+                <option value="mew">Thrissur</option>
+                <option value="cvw">Kozhikode</option>
+                <option value="plw">Palakkad</option>
+                <option value="vls">Kollam</option>
+                <option value="ckg">Kannur</option>
+                <option value="rlo">Alappuzha</option>
+                <option value="cln">Kottayam</option>
+                <option value="bot">Kasaragod</option>
+                <option value="rck">Pathanamthitta</option>
+                <option value="oth">Idukki</option>
+                <option value="oth">Wayanad</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <p id="p6"></p>
+            <label class="control-label" for="id_local_body">Local Body Name - പ്രാദേശിക ബോഡി നാമം</label>
+            <select name="local_body" class="form-control" title="" id="id_local_body">
+                <option value="" selected>---------</option>
+                <!-- The Value Attribute Need To Removed.Name will be value -->
+                <option value="dcr">something</option>
+                <option value="dcr">something</option>
+            </select>
+        </div>
+    </fieldset>
+    <fieldset>
+        <p id="p7"></p>
+        <legend>Organisation/Institution Details (optional) | ഓർഗനൈസേഷൻ / സ്ഥാപനം വിശദാംശങ്ങൾ</legend>
+        <div class="form-group ">
+            <label class="control-label " for="id_organisation ">Organization (സംഘടന) / Institution </label>
+            <input type="text " name="organisation " maxlength="250 " class="form-control " placeholder="Organization (സംഘടന) /
+					 Institution " title=" " id="id_organisation " value="{{ current.organisation }}">
+        </div>
+    </fieldset>
+    <fieldset>
+        <p id="p8"></p>
+        <legend>Available Date & Time To Work | ലഭ്യമായ തിയ്യതിയും ജോലി ചെയ്യാനുള്ള സമയവും</legend>
+        <div class="form-group">
+            <label class="control-label" for="id_available_date">Available Date - ലഭ്യമായ തിയ്യതി</label>
+            <input type="text" name="date" maxlength="150" class="form-control" placeholder="Available Date - ലഭ്യമായ തിയ്യതി" title=""
+                id="id_date">
+        </div>
+        <div class="form-group">
+            <p id="p9"></p>
+            <label class="control-label" for="id_time">Available Time - ലഭ്യമായ സമയം</label>
+            <input type="text" name="time" maxlength="150" class="form-control" placeholder="Available Time - ലഭ്യമായ സമയം" title=""
+                id="id_time">
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Account Creation | അക്കൗണ്ട് സൃഷ്ടിക്കൽ</legend>
+        <div class="form-group">
+            <p id="p10"></p>
+            <label class="control-label" for="id_pass">Password - പാസ്വേഡ്</label>
+            <input type="password" name="password" maxlength="150" class="form-control" placeholder="Password - പാസ്വേഡ്" title="" id="id_password">
+        </div>
+        <div class="form-group">
+            <p id="p11"></p>
+            <label class="control-label" for="id_re_pass">Retype Password - പാസ്വേഡ് വീണ്ടും ടൈപ്പുചെയ്യുക </label>
+            <input type="password" name="re_password" maxlength="150" class="form-control" placeholder="Retype Password - പാസ്വേഡ് വീണ്ടും ടൈപ്പുചെയ്യുക"
+                title="" id="id_re_password">
+        </div>
+    </fieldset>
+    <div class="form-group">
+        <input type="hidden" name="is_active" value="{{ current.is_active }}" />
+        <label>
+            <input id="consent" type="radio" checked class="big-input" /> Like to Continue As A Volunteer <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            ഒരു വോളന്റിയായി തുടരാൻ ആഗ്രഹിക്കുന്നു
+        </label>
+        <label>
+            <input id="not_consent" type="radio" class="big-input" /> Don't like to Continue As A Volunteer<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            ഒരു വോളന്റിയായി തുടരാൻ ഇഷ്ടപ്പെടുന്നില്ല
+        </label>
+    </div>
+    <div class="form-group ">
+        <blockquote><small>
+                By providing your personal information, you consent to making such information accessible to persons who visit this website.
+                You further acknowledge and agree that in order to serve the specific purposes for which personal information
+                is volunteered by you, such information needs to be accessible to the public at large and therefore, by volunteering
+                your information on this website, you consent to making such information public. By providing your phone
+                number and email address, you further consent to being contacted by anyone who accesses such information
+                through this website. The creators of this website or the government of Kerala shall not be liable for any
+                unauthorized use, misuse or sharing of such information.
+            </small></blockquote>
+        <div class="form-group">
+            <p id="p12"></p>
+            <label><input id="register_consent" type="checkbox" value="" class="big-input"> I agree to the terms and conditions
+                | നിയമങ്ങളും വ്യവസ്തകളും ഞാന് അംഗീകരിക്കുന്നു</label>
+        </div>
+        <div class="form-group">
+            <button type="submit " class="btn btn-primary " id="submit_btn"><span class="glyphicon glyphicon-star "></span>
+                Submit</button>
+        </div>
+    </div>
+</form>
+<script src="./Kerala Rescue_files/jquery.min.js "></script>
+<script>
+    $(document).ready(function () {
+        $("[name=other_status] ").attr('type', 'hidden');
+        $("[name=other_status] ").attr(' ', false)
+        $("[for=id_other_status] ").hide();
+    })
+    $("[name=status] ").change(function () {
+        var value = this.value;
+        if (value !== 'otr') {
+            $("[name=other_status] ").attr('type', 'hidden')
+            $("[name=other_status] ").attr(' ', false)
+            // $("[for=id_other_status] ").hide();
+        } else {
+            $("[name=other_status] ").attr('type', 'text')
+            // $("[for=id_other_status] ").show();
+        }
+    })
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+    var status;
+    $(document).ready(function () {
+        $('#submit_btn').click(function (e) {
+
+            var name = $('#id_name').val();
+            var phone = $('#id_phone').val();
+            var email = $('#id_email').val();
+            var addr = $('#id_address').val();
+            var area = $('#id_area').val();
+            var local_body = $('#id_local_body').val();
+            var org = $('#id_organization').val();
+            var date = $('#id_date').val();
+            var time = $('#id_time').val();
+            var pass = $('#id_password').val();
+            var re_pass = $('#id_re_password').val();
+
+            var name_regex = /^[a-zA-Z]+$/;
+            var email_regex = /^([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)@([0-9a-zA-Z]([-_\\.]*[0-9a-zA-Z]+)*)[\\.]([a-zA-Z]{2,9})$/;
+            var add_regex = /^[0-9a-zA-Z]+$/;
+            var phone_regex = /^[0-9]+$/;
+            var date_regex = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/;
+            var time_regex = /^(10|11|12|[1-9]):[0-5][0-9]$/;
+            var pass_regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+            if (name.length == 0) {
+                $('#head').text("* All fields are mandatory *");
+                $("#id_name").focus();
+                return false;
+            }
+            else if (!name.match(name_regex) || name.length == 0) {
+                $('#p1').text("* For your name please use alphabets only *");
+                $("#id_name").focus();
+                return false;
+            }
+            else if (!phone.match(phone_regex) || phone.length != 10) {
+                $('#p2').text("* Please enter a valid number *");
+                $("#id_phone").focus();
+                return false;
+            }
+            else if (!email.match(email_regex) || email.length == 0) {
+                $('#p3').text("* Enter A Valid Email *");
+                $("#id_email").focus();
+                return false;
+            }
+            else if (!addr.match(add_regex) || addr.length == 0) {
+                $('#p4').text("* For Address please use numbers and letters *");
+                $("#id_address").focus();
+                return false;
+            }
+            else if (area.length == 0) {
+                $('#p5').text("* Please Select A District *");
+                $("#id_area").focus();
+                return false;
+            }
+            else if (local_body.length == 0) {
+                $('#p6').text("* Please Select A Local Body *");
+                $("#id_local_body").focus();
+                return false;
+            }
+            else if (!date.match(date_regex) || date.length == 0) {
+                $('#p8').text("* Enter A Valid Date in DD/MM/YYYY Format*");
+                $("#id_date").focus();
+                return false;
+            }
+            else if (!time.match(time_regex) || time.length == 0) {
+                $('#p9').text("* Enter A Valid time in hh:mm Format*");
+                $("#id_time").focus();
+                return false;
+            }
+            else if (!pass.match(pass_regex)) {
+                $('#p10').text("* Password Must contai  1 uppercase, 1 lowercase, 1number, 8charechters long*");
+                $("#id_password").focus();
+                return false;
+            }
+            else if (pass != re_pass || re_pass.length == 0) {
+                $('#p11').text("* Password not matching *");
+                $("#id_re_password").focus();
+                return false;
+            }
+            else if (!$('#register_consent').prop('checked')) {
+                $('#p12').text("* Must Agree *");
+                $("#register_consent").focus();
+                return false;
+            }
+            else {
+                alert("Form Submitted Successfuly!");
+                return true;
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

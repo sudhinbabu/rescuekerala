@@ -86,6 +86,49 @@ class RegisterVolunteer(CreateView):
     fields = ['name', 'district', 'phone', 'organisation', 'area', 'address']
     success_url = '/reg_success/'
 
+
+class RenewVolunteerForm(forms.ModelForm):
+
+
+    class Meta:
+       model = Volunteer
+       help_texts = {
+            'local_body': 'Indicate the local body name',
+            'date_time': 'Indicate the dates that you are available for volunteering',
+        }
+       fields = ['district', 'name', 'local_body', 'phone', 'email', 'date_time', 'has_consented']
+
+       read_only = ('phone',)
+       widgets = {
+           'name': forms.Textarea(attrs={'rows':1}),
+           'phone': forms.Textarea(attrs={'rows':3, 'readonly':True}),
+       }
+
+class RenewVolunteerPage(CreateView):
+    model = Volunteer
+    fields = ['district', 'organisation', 'is_active', 'name', 'local_body', 'phone', 'email', 'date_time', 'has_consented']
+    template_name = "mainapp/renew_volunteer.html"
+    success_url = '/reg_success/'
+    volunteer_ph = ""
+
+    def dispatch(self, request, *args, **kwargs):
+        self.volunteer_ph = kwargs['volunteer_ph']
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            current = self.model.objects.all().filter(phone=self.volunteer_ph)[0]
+        except:
+            return HttpResponseRedirect(reverse("reg_fail"))
+        return render(request, self.template_name, {"current": current})
+
+    def form_invalid(self, form):
+        return HttpResponse(form.errors)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
 def volunteerdata(request):
     filter = VolunteerFilter( request.GET, queryset=Volunteer.objects.all() )
     req_data = filter.qs.order_by('-id')
@@ -216,6 +259,9 @@ class ReqSuccess(TemplateView):
 
 class RegSuccess(TemplateView):
     template_name = "mainapp/reg_success.html"
+
+class RegFail(TemplateView):
+    template_name = "mainapp/reg_fail.html"
 
 
 class SubmissionSuccess(TemplateView):
@@ -941,3 +987,12 @@ class CollectionCenterView(CreateView):
     model = CollectionCenter
     form_class = CollectionCenterForm
     success_url = '/collection_centers/'
+
+
+def test_send_sms(request):
+    print(request.GET)
+    import time
+    time.sleep(2)
+    return JsonResponse({
+        "success": True
+        }, safe=False)

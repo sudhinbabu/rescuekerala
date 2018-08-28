@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'request_details/(?P<request_id>\d+)/$', views.request_details, name='requestdetailsview'),
     path('contactus/', views.districtmanager_list, name='contactus'),
     path('reg_success/', views.RegSuccess.as_view(), name='reg_successview'),
+    path('reg_fail/', views.RegFail.as_view(), name='reg_fail'),
     path('req_sucess/', views.ReqSuccess.as_view(), name='req_sucessview'),
     path('district_needs/', views.DistNeeds.as_view(), name='distneedsview'),
     path('collection_center/', views.CollectionCenterView.as_view(), name='collection_centers_view'),
@@ -62,4 +63,6 @@ urlpatterns = [
     path('consent_success/', views.ConsentSuccess.as_view(), name='consent_success'),
     url(r'c/(?P<pk>\d+)/(?P<ts>\d+)/$', views.VolunteerConsent.as_view(), name='volunteer_consent'),
     url('missing_and_finding_persons/', views.ReportFindPerson.as_view(), name='report_find_person'),
+    url(r'renewvolunteer/(?P<volunteer_ph>\d+)/$', views.RenewVolunteerPage.as_view(), name='renewvolunteer'),
+    url('test_send_sms/', views.test_send_sms, name='test_send_sms'),
 ]
